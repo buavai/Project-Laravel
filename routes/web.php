@@ -23,8 +23,6 @@ Route::get('add_user','pageController@getRegister',function () {
 Route::post('add_user','pageController@postRegister',function () {
 		
 })->name('add');
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

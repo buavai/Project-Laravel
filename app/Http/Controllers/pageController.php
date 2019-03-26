@@ -5,11 +5,15 @@ use App\users_admins;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\userRequest;
+use Auth;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 class pageController extends Controller
 {
 	
     private $user;
 	public function __construct(users_admins $users){
+        $this->middleware('auth');
 		$this->user = $users;
 	}
 
@@ -39,6 +43,7 @@ class pageController extends Controller
             'phone' => $user_req->number,
         ];
         $user = $this->user->create($dataCreate);
+         Mail::to($dataCreate['mail_address'])->send(new WelcomeMail($user));
         
         if (isset($user)) {
             session()->flash('thanhcong','Thêm mới người dùng thành công');
