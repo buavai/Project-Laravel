@@ -15,7 +15,7 @@ class pageController extends Controller
 	
     private $user;
 	public function __construct(users_admins $users){
-        //$this->middleware('auth');
+        $this->middleware('auth');
 		$this->user = $users;
 	}
 
