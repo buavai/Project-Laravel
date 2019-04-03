@@ -29,6 +29,7 @@ class userRequest extends FormRequest
             'addresss'=>'max:255',
             'number'=>'required|integer|max:15',
             'password-confirm'=>'required|same:password',
+            'role'=>'required',
         ];
     }   
 }

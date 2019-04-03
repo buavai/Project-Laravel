@@ -9,7 +9,7 @@
 		<table>
 			<tr>
 				<td>tim kiem theo mail</td>
-				<td><input type="text" name="mail"></td>
+				<td><input type="text" name="mail_address"></td>
 			</tr>
 			<tr>
 				<td>tim kiem theo address</td>
@@ -19,31 +19,37 @@
 				<td>tim kiem theo phone</td>
 				<td><input type="number" name="phone"></td>
 			</tr>
-			<input type="submit" value="tim kiem">
+			<input type="submit" name="submit" value="tim kiem">
 			
 		</table>
 	</form>
-	<table>
+	<table width="100%">
 		<tr>
 			<td>Email</td>
 			<td>address</td>
 			<td>password</td>
 			<td>phone</td>
-			
+			<td>Class</td>		
 		</tr>
+		
 		@foreach($user as $rows)
 		<tr>
 			<td>{{EnvatoUser::toUpperCase($rows->mail_address)}}</td>
 			<td>{{$rows->address}}</td>
 			<td>{{$rows->password}}</td>
 			<td>{{$rows->phone}}</td>
+			@foreach($class as $rows2)
+			@if($rows->ClassRoom_id == $rows2->id)
+			<td>{{$rows2->name}}</td>
+			@endif
+			@endforeach
 		</tr>
 		@endforeach
 		
 	</table>
 	<div id="pagination" class="row text-center">
 		<div class="pagination-wrap col-lg-12 col-md-12">
-			{{$user->links()}}
+			
 		</div>
 	</div>
 @endsection

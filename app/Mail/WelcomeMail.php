@@ -16,11 +16,12 @@ class WelcomeMail extends Mailable
      *
      * @return void
      */
-    public $user;
-    public function __construct($user){
-    //
-    $this->user = $user;
-}
+    public $event;
+    public function __construct($event)
+    {
+        $this->event = $event;
+    }
+
 
     /**
      * Build the message.

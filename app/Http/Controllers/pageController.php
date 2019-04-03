@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\classrooms;
 use App\users_admins;
 use DB;
 use Illuminate\Http\Request;
@@ -8,30 +9,28 @@ use App\Http\Requests\userRequest;
 use Auth;
 use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Mail;
+use App\Events\NewProduct;
 class pageController extends Controller
 {
 	
     private $user;
 	public function __construct(users_admins $users){
-        $this->middleware('auth');
+        //$this->middleware('auth');
 		$this->user = $users;
 	}
 
     public function getUser(Request $req) {
-
-        $query = [];
-        $f_mail = $req->get('mail');
-        $f_address = $req->get('address');
-        $f_phone = $req->get('phone');
-        $query=[['mail_address','like','%'.$f_mail.'%'],['address','like','%'.$f_address.'%']];
-        if(isset($query)) {
-            $user = DB::table('users_admins')->where($query)->paginate(20);
+        $user = DB::table('users_admins')->get();
+        $class = DB::table('classrooms')->get();
+        if(!empty($_GET['submit'])){
+          $user = users_admins::UserSearch($req)->get();
         }
-    	return view('view_user',compact('user'));
+    	return view('view_user',compact('user','class'));
     }
 
     public function getRegister() {
-        return view('view_addUser');
+        $class = DB::table('classrooms')->get();
+        return view('view_addUser',compact('class'));
     }
 
     public function postRegister(userRequest $user_req)  {
@@ -41,10 +40,13 @@ class pageController extends Controller
             'address' => $user_req->address,
             'password' => bcrypt($user_req->password),
             'phone' => $user_req->number,
+            'role'=>$user_req->role,
+            'ClassRoom_id'=> $user_req->class,
         ];
         $user = $this->user->create($dataCreate);
-         Mail::to($dataCreate['mail_address'])->send(new WelcomeMail($user));
-        
+
+         // Mail::to($dataCreate['mail_address'])->send(new WelcomeMail($user));
+          event(new NewProduct($user));
         if (isset($user)) {
             session()->flash('thanhcong','Thêm mới người dùng thành công');
             return redirect()->route('user');

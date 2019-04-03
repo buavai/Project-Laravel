@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Welcome Email</title>
-</head>
-
-<body>
-<h2>Your registered email-id is {{$user['mail_address']}}</h2>
+@extends('layout.default')
+@section('content')
+<h2>Your registered email-id is </h2>
 <br/>
+@endsection
 
-</body>
-
-</html>

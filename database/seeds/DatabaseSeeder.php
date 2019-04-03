@@ -11,8 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
-        $this->call(user_admins::class);
-        Model::reguard();
+         $this->call(Classroom::class);
+        $this->call(users_admin::class);
+       
+       
     }
 }

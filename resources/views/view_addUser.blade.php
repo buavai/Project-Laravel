@@ -55,6 +55,19 @@
 					<p class="help is-danger">{{ $errors->first('number') }}</p>
 					@endif
 				</tr>
+				<tr>
+					<td><select name="role" id="">
+						<option value="1">Nhân viên</option>
+						<option value="2">Amin</option>						
+					</select></td>
+				</tr>
+				<tr>
+					<td><select name="class" id="">
+						@foreach($class as $rows)
+						<option value="{{$rows->id}}">{{$rows->name}}</option>
+						@endforeach
+					</select></td>
+				</tr>
 				<input type="submit" value="đăng ký">
 			</table>
 		</form>

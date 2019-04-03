@@ -16,10 +16,10 @@ Route::get('/', function () {
 });
 Route::get('user','pageController@getUser',function () {
 
-})->name('user');
+})->name('user')->middleware('checkRole');
 Route::get('add_user','pageController@getRegister',function () {
 		
-})->name('add_user');
+})->name('add_user')->middleware('checkRole','checkClass');
 Route::post('add_user','pageController@postRegister',function () {
 		
 })->name('add');

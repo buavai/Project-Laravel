@@ -32,9 +32,21 @@ class users_admins extends Model
         'address',
         'password',
         'phone',
+        'role',
+        'ClassRoom_id',
         'deleted_at',
         'created_at',
         'updated_at'
 
     ];
+    public function scopeUserSearch($query ,$req) {
+
+        $array = [];
+        $f_mail = $req->mail_address;
+        $f_address = $req->address;
+        $f_phone = $req->phone;
+        $array=[['mail_address','like','%'.$f_mail.'%'],['address','like','%'.$f_address.'%']];
+
+        return $query->where($array);
+    }
 }

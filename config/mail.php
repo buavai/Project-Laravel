@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'quyen.devpro@gmail.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'phammanhquyen19111997@gmail.com'),
         'name' => env('MAIL_FROM_NAME', 'quyen'),
     ],
 
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('quyen.devpro@gmail.com'),
+    'username' => 'phammanhquyen19111997@gmail.com',
 
-    'password' => env('quyen1997'),
+    'password' => 'rkjgzqyaeehwbltg',
 
     /*
     |--------------------------------------------------------------------------
@@ -132,5 +132,12 @@ return [
     */
 
     'log_channel' => env('MAIL_LOG_CHANNEL'),
+    'stream' => [
+    'ssl' => [
+        'allow_self_signed' => true,
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+    ],
+],
 
 ];
